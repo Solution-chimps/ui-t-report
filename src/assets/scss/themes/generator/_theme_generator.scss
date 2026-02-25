@@ -1,0 +1,15 @@
+@mixin generate-css-vars($map, $parent: null) {
+
+  @each $key,
+  $value in $map {
+    $new-key: if($parent, "#{$parent}-#{$key}", $key);
+
+    @if type-of($value)=="map" {
+      @include generate-css-vars($value, $new-key);
+    }
+
+    @else {
+      --#{$prefix}-#{$new-key}: #{$value};
+    }
+  }
+}

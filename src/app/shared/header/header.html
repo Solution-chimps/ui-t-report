@@ -1,0 +1,13 @@
+<header>
+  <ul>
+    <li class="user">{{initials()}}</li>
+    @for (item of items; track $index) {
+      @if (item.onclick) {
+        <li (click)="item.onclick({ item, event: $event })">{{ item.name }}</li>
+      } @else {
+        <li [routerLink]="item.routerLink">{{ item.name }}</li>
+      }
+    }
+  </ul>
+  <label for="??">NR 13 Relatorios</label>
+</header>

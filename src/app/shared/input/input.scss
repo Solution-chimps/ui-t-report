@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 15px 0px;
+  position: relative;
+  transition: margin-top 0.2s;
+
+  &.ng-invalid.ng-touched input {
+    border: 1px solid var(--ui-feedback-danger-500);
+  }
+
+  &:has(>label+div>input:focus),
+  &:not(:has(>label+div>input:placeholder-shown)) {
+    margin-top: 40px;
+  }
+
+  label {
+    transition: all 0.2s;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    left: 10px;
+    color: var(--ui-placeholder-color);
+    font-weight: 500;
+    z-index: 1;
+
+    &:has(+div>input:focus),
+    &:not(:has(+div>input:placeholder-shown)) {
+      top: 0;
+      transform: translate(0px, -100%);
+      left: 0;
+
+      +div>input::placeholder {
+        color: var(--ui-placeholder-color);
+      }
+    }
+
+    +div>input::placeholder {
+      color: transparent;
+    }
+
+  }
+
+  input {
+    margin: 0px;
+    transition: all 0.2s;
+
+    &:has(+.material-symbols-outlined) {
+      padding-right: 40px;
+    }
+
+    &:not(:placeholder-shown):focus::placeholder {
+      color: transparent;
+    }
+  }
+
+  .password-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    color: var(--ui-placeholder-color);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: .2s opacity;
+    user-select: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

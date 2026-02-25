@@ -1,0 +1,7 @@
+@import './../bases/dark_base';
+
+$tokens: $dark-tokens;
+
+.dark {
+  @include generate-css-vars($tokens)
+}

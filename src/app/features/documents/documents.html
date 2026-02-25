@@ -1,0 +1,26 @@
+<section>
+  <h1>Lista de Relatórios</h1>
+  <div class="filters"></div>
+  <table>
+    <thead>
+      <th>Nº Relatório</th>
+      <th>Empresa</th>
+      <th>Tag</th>
+      <th>Dt. Inspeção</th>
+      <th>Venc. Exame</th>
+      <th>Recomendações</th>
+    </thead>
+    <tbody>
+     @for (item of reports(); track $index) {
+      <tr>
+        <td>{{item.reportNumber}}</td>
+        <td>{{item.company}}</td>
+        <td>{{item.tag}}</td>
+        <td>{{item.inspectionDate}}</td>
+        <td>{{item.examExpirationDate}}</td>
+        <td>{{item.recommendations}}</td>
+      </tr>
+     }
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,7 @@
+@import './../bases/light_base';
+
+$tokens: $light-tokens;
+
+.light {
+  @include generate-css-vars($tokens)
+}

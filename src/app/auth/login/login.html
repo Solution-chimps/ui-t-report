@@ -1,0 +1,16 @@
+<section>
+  <form [formGroup]="form">
+    <h1>UIT Report</h1>
+    <div class="row w-100 justify-content-center">
+      <div class="col-8">
+        <ui-input type="text" label="Usuário" placeholder="Informe seu usuário" formControlName="user"/>
+      </div>
+    </div>
+    <div class="row w-100 justify-content-center mb-3">
+      <div class="col-8">
+        <ui-input type="password" label="Senha" placeholder="Informe sua senha" formControlName="password"/>
+      </div>
+    </div>
+    <button (click)="handleLogin()">Entrar</button>
+  </form>
+</section>

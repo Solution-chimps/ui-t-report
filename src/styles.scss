@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-brand-primary-500) var(--ui-surface-body);
+
+  &::selection {
+    background-color: var(--ui-selection-bg);
+    color: var(--ui-selection-text);
+  }
+}

@@ -1,0 +1,9 @@
+@use "./profiles/index";
+
+.light-theme {
+  @extend .light;
+}
+
+.dark-theme {
+  @extend .dark;
+}
