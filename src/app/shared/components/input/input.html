@@ -1,8 +1,9 @@
 @if (label()) {
-  <label [for]="label()">{{ label() }}</label>
+  <label [for]="label()" (click)="input.focus()">{{ label() }}</label>
 }
 <div class="position-relative w-100">
   <input
+  #input
     [type]="inputType() ?? 'text'"
     [placeholder]="placeholder() ?? ''"
     [disabled]="disabled()"
