@@ -1,0 +1,6 @@
+@if (show()) {
+  <span class="ui-tooltip" [class]="placement()" [ngStyle]="styled()">
+    {{ message() }}
+  </span>
+}
+<ng-content></ng-content>

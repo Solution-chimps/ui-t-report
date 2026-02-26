@@ -32,7 +32,9 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/_elements.scss",
-              "src/assets/scss/themes/_themes.scss"
+              "src/assets/scss/themes/_themes.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/scss/_toastr.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/assets/scss"]
@@ -93,7 +95,9 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/_elements.scss",
-              "src/assets/scss/themes/_themes.scss"
+              "src/assets/scss/themes/_themes.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/scss/_toastr.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]

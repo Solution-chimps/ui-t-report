@@ -1,7 +1,7 @@
 import { Component, computed, input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { AbstractControlValueAcessor } from '../../core/abstracts/control-value-acessor.abstract';
+import { AbstractControlValueAcessor } from '../../../core/abstracts/control-value-acessor.abstract';
 import { InputType } from './input-type.enum';
 
 @Component({

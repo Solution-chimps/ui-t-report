@@ -5,6 +5,7 @@ import {
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideToastr } from 'ngx-toastr';
 import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 
 import { routes } from './app.routes';
@@ -58,6 +59,13 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(NgxUiLoaderRouterModule.forRoot({
       showForeground: true,
     })),
-    importProvidersFrom(NgxUiLoaderHttpModule)
+    importProvidersFrom(NgxUiLoaderHttpModule),
+    provideToastr({
+      timeOut: 5000,
+      autoDismiss: true,
+      preventDuplicates: true,
+      tapToDismiss: true,
+      progressAnimation: 'decreasing'
+    })
   ]
 };

@@ -10,6 +10,28 @@
 
     @else {
       --#{$prefix}-#{$new-key}: #{$value};
+
+      @if type-of($value)=="color" {
+        --#{$prefix}-#{$new-key}-rgb: #{red($value)},
+        #{green($value)},
+        #{blue($value)};
+      }
+
+      .text-#{$new-key} {
+        color: var(--#{$prefix}-#{$new-key}) !important;
+      }
+
+      .bg-#{$new-key} {
+        background-color: var(--#{$prefix}-#{$new-key}) !important;
+      }
+
+      .border-#{$new-key} {
+        border-color: var(--#{$prefix}-#{$new-key}) !important;
+      }
+
+      .bg-#{$new-key}-soft {
+        background-color: rgb(var(--#{$prefix}-#{$new-key}-rgb) / var(--ui-opacity, 0.1)) !important;
+      }
     }
   }
 }
