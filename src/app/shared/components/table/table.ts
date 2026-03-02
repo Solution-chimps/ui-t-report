@@ -17,4 +17,8 @@ export class Table<T = unknown> {
   public readonly title = input('');
   public readonly content = input<TableDataBuilderContent<T>[]>([]);
 
+  public get window() {
+    return window;
+  }
+
 }

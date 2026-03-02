@@ -2,54 +2,92 @@
   <h2>Lista de Relatórios</h2>
   <div class="filters"></div>
   <div class="table-container">
+    @if(window.innerWidth < 768) { @for (item of items(); track $index) {
+    <div class="mobile-item">
+      <div class="item-content">
+        <ul>
+          @for (content of content(); track $index) {
+          <li>
+            @if (content.header.resolveConditional()) {
+            <span
+              [class]="content.header.resolveClass()"
+              [ngStyle]="content.header.resolveStyle()"
+              >{{ content.header.resolveText() }}</span
+            >
+            } @if (content.content.resolveConditional(item)) {
+            <label
+              [class]="content.content.resolveClass()"
+              [ngStyle]="content.content.resolveStyle()"
+              (click)="content.content.click?.(item, $event)"
+            >
+              {{ content.content.resolveContent(item) }}
+            </label>
+            }
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="items-buttons">
+        <div class="buttons">
+          @for (button of buttons(); track $index) {
+          <button
+            [ui-tooltip]="button.resolveTooltip(item)"
+            [class]="button.resolveClass(item)"
+            [ngStyle]="button.resolveStyle(item)"
+            (click)="button.click?.(item, $event)"
+          >
+            <span class="material-symbols-outlined">
+              {{ button.resolveIcon(item) }}
+            </span>
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+    } } @else {
     <table>
       <thead>
-        @for (item of content(); track $index) {
-          @if (item.header.resolveConditional()) {
-            <th [class]="item.header.resolveClass()" [ngStyle]="item.header.resolveStyle()">
-              {{ item.header.resolveText() }}
-            </th>
-          }
-        }
-        @if (buttons().length) {
-          <th></th>
+        @for (item of content(); track $index) { @if (item.header.resolveConditional()) {
+        <th [class]="item.header.resolveClass()" [ngStyle]="item.header.resolveStyle()">
+          {{ item.header.resolveText() }}
+        </th>
+        } } @if (buttons().length) {
+        <th></th>
         }
       </thead>
       <tbody>
         @for (item of items(); track $index) {
-          <tr>
-            @for (td of content(); track $index) {
-              @if (td.content.resolveConditional(item)) {
-                <td
-                  [class]="td.content.resolveClass()"
-                  [ngStyle]="td.content.resolveStyle()"
-                  (click)="td.content.click?.(item, $event)"
-                >
-                  {{ td.content.resolveContent(item) }}
-                </td>
+        <tr>
+          @for (td of content(); track $index) { @if (td.content.resolveConditional(item)) {
+          <td
+            [class]="td.content.resolveClass()"
+            [ngStyle]="td.content.resolveStyle()"
+            (click)="td.content.click?.(item, $event)"
+          >
+            {{ td.content.resolveContent(item) }}
+          </td>
+          } } @if (buttons().length) {
+          <td>
+            <div class="buttons">
+              @for (button of buttons(); track $index) {
+              <button
+                [ui-tooltip]="button.resolveTooltip(item)"
+                [class]="button.resolveClass(item)"
+                [ngStyle]="button.resolveStyle(item)"
+                (click)="button.click?.(item, $event)"
+              >
+                <span class="material-symbols-outlined">
+                  {{ button.resolveIcon(item) }}
+                </span>
+              </button>
               }
-            }
-            @if (buttons().length) {
-              <td>
-                <div class="buttons">
-                  @for (button of buttons(); track $index) {
-                    <button
-                      [ui-tooltip]="button.resolveTooltip(item)"
-                      [class]="button.resolveClass(item)"
-                      [ngStyle]="button.resolveStyle(item)"
-                      (click)="button.click?.(item, $event)"
-                    >
-                      <span class="material-symbols-outlined">
-                        {{ button.resolveIcon(item) }}
-                      </span>
-                    </button>
-                  }
-                </div>
-              </td>
-            }
-          </tr>
+            </div>
+          </td>
+          }
+        </tr>
         }
       </tbody>
     </table>
+    }
   </div>
 </section>

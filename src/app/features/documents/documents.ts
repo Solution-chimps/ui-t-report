@@ -11,7 +11,7 @@ import { TableDataBuilderContent } from '../../core/models/table/table-builder-c
 })
 export class Documents extends AbstractTable<Report> {
 
-  public readonly items = signal(Report.getMock());
+  protected override readonly items = signal(Report.getMock());
 
   public override title(): string {
     return 'Lista de Relatórios'

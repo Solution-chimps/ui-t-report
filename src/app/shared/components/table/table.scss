@@ -1,10 +1,67 @@
+@use 'breakpoints'as *;
+
+.button-style {
+  padding: 0px 5px;
+  background-color: transparent;
+  color: var(--ui-text-primary);
+  border: 1px solid var(--ui-brand-primary-500);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 :host {
   padding: 10px;
 
   .table-container {
     padding: 20px;
-    background-color: var(--ui-disabled-bg);
     border-radius: 8px;
+
+    @include desktop {
+      background-color: var(--ui-disabled-bg);
+    }
+
+    .mobile-item {
+      background-color: var(--ui-disabled-bg);
+      margin-bottom: 10px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 8px;
+      box-shadow: 2px 2px var(--ui-text-primary);
+
+      .item-content {
+        ul {
+          li {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 5px;
+            font-size: 14px;
+
+            span {
+              color: var(--ui-gray-600);
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+
+      .items-buttons {
+        .buttons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+
+          button {
+            @extend .button-style;
+          }
+        }
+      }
+
+    }
 
     table>tbody>tr>td>.buttons {
       display: flex;
@@ -13,14 +70,7 @@
       gap: 5px;
 
       button {
-        padding: 0px 5px;
-        background-color: transparent;
-        color: var(--ui-text-primary);
-        border: 1px solid var(--ui-brand-primary-500);
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @extend .button-style;
       }
     }
   }

@@ -28,13 +28,19 @@ button {
   }
 }
 
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
 
 body {
   background-color: var(--ui-surface-body);
   color: var(--ui-text-primary);
   height: 100dvh;
   width: 100dvw;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
   font-weight: 600;
   transition: background-color 0.2s, color 0.2s;
 }

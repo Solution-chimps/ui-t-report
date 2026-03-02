@@ -18,23 +18,26 @@ export class User {
     }
     let usersData: User[];
     try {
-      usersData = (JSON.parse(atob(import.meta.env.NG_APP_USER_DATA)) as { nickname: string, id: string, name: string }[]).map(user => new User({
-        password: '',
-        user: user.nickname,
-        id: user.id,
-        name: user.name
-      }));
+      const userDataStr = import.meta.env.NG_APP_USER_DATA
+      if (userDataStr) {
+        usersData = (JSON.parse(atob(userDataStr)) as { nickname: string, id: string, name: string }[]).map(user => new User({
+          password: '',
+          user: user.nickname,
+          id: user.id,
+          name: user.name
+        }));
+      }
     } catch (e) {
       console.warn(e);
       usersData = []
     }
-    return User.usersCache = import.meta.env.NG_APP_USERS.split(',').map((data) => {
+    return User.usersCache = import.meta.env.NG_APP_USERS?.split(',').map((data) => {
       const splitted = data.split('@');
       const [user] = splitted;
       const password = splitted.slice(1).join('@');
       const userData = usersData.find(uData => uData.user === user);
       return new User({ user, password, id: userData?.id, name: userData?.name })
-    })
+    }) ?? []
   }
 
   public static getUserLogged(): User | undefined {
