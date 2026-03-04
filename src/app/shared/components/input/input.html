@@ -1,17 +1,52 @@
 @if (label()) {
-  <label [for]="label()" (click)="input.focus()">{{ label() }}</label>
+  <label [for]="label()" (click)="input?.nativeElement?.focus()">{{ label() }}</label>
 }
 <div class="position-relative w-100">
-  <input
-  #input
-    [type]="inputType() ?? 'text'"
-    [placeholder]="placeholder() ?? ''"
-    [disabled]="disabled()"
-    [maxlength]="maxlength()"
-    [(ngModel)]="value"
-    (ngModelChange)="writeValue(value)"
-  />
+  @if (mask()) {
+    <input
+      #input
+      [type]="inputType() ?? 'text'"
+      [placeholder]="placeholder() ?? ''"
+      [disabled]="disabled()"
+      [maxlength]="maxlength()"
+      [(ngModel)]="value"
+      (ngModelChange)="writeValue(value)"
+      [mask]="mask()"
+      [suffix]="suffix()"
+      [prefix]="prefix()"
+      [thousandSeparator]="thousandSeparator()"
+      [decimalMarker]="decimalMarker()"
+      [clearIfNotMatch]="clearIfNotMatch()"
+      [showMaskTyped]="showMaskTyped()"
+      [placeHolderCharacter]="placeHolderCharacter()"
+      [shownMaskExpression]="shownMaskExpression()"
+      [specialCharacters]="specialCharacters()!"
+      [dropSpecialCharacters]="dropSpecialCharacters()"
+      [hiddenInput]="hiddenInput()"
+      [validation]="validation()"
+      [instantPrefix]="instantPrefix()"
+      [separatorLimit]="separatorLimit()"
+      [apm]="apm()"
+      [allowNegativeNumbers]="allowNegativeNumbers()"
+      [leadZeroDateTime]="leadZeroDateTime()"
+      [triggerOnMaskChange]="triggerOnMaskChange()"
+      [keepCharacterPositions]="keepCharacterPositions()"
+      [patterns]="patterns()!"
+    />
+  } @else {
+    <input
+      #input
+      [type]="inputType() ?? 'text'"
+      [placeholder]="placeholder() ?? ''"
+      [disabled]="disabled()"
+      [maxlength]="maxlength()"
+      [(ngModel)]="value"
+      (ngModelChange)="writeValue(value)"
+    />
+  }
   @if (type() === 'password') {
-    <span (click)="handleTogglePassword()" class="material-symbols-outlined password-icon"> {{passwordIcon()}} </span>
+    <span (click)="handleTogglePassword()" class="material-symbols-outlined password-icon">
+      {{ passwordIcon() }}
+    </span>
   }
 </div>

@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs';
@@ -17,7 +18,7 @@ export class Document implements OnInit {
 
   public readonly form = new FormBuilder().group({
     company: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
-    abbreviation: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+    abbreviation: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(90)]],
     cnpj: ['', [UiValidators.cnpj]],
     cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     neighborhood: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
@@ -27,10 +28,12 @@ export class Document implements OnInit {
   });
 
   private readonly cnpjService = inject(CNPJService);
+  private readonly destroyRef = inject(DestroyRef);
 
 
   public ngOnInit(): void {
     this.form.get('cnpj')?.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef),
       map((cnpj) => cnpj?.replace(/\D/g, '')),
       filter((cnpj) => !!this.form.get('cnpj')?.valid && !!cnpj), switchMap((cnpj) => this.cnpjService.findByCnpj(cnpj!))).subscribe((company) => {
         if (company) {

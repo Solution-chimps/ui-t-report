@@ -6,6 +6,7 @@ import {
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { provideToastr } from 'ngx-toastr';
 import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 
@@ -68,6 +69,7 @@ export const appConfig: ApplicationConfig = {
       preventDuplicates: true,
       tapToDismiss: true,
       progressAnimation: 'decreasing'
-    })
+    }),
+    provideEnvironmentNgxMask()
   ]
 };
