@@ -1,0 +1,10 @@
+{
+  "/opencnpj": {
+    "target": "https://api.opencnpj.org",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/opencnpj": ""
+    }
+  }
+}

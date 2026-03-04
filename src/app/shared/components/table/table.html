@@ -1,93 +1,131 @@
 <section>
   <h2>Lista de Relatórios</h2>
-  <div class="filters"></div>
-  <div class="table-container">
-    @if(window.innerWidth < 768) { @for (item of items(); track $index) {
-    <div class="mobile-item">
-      <div class="item-content">
-        <ul>
-          @for (content of content(); track $index) {
-          <li>
-            @if (content.header.resolveConditional()) {
-            <span
-              [class]="content.header.resolveClass()"
-              [ngStyle]="content.header.resolveStyle()"
-              >{{ content.header.resolveText() }}</span
-            >
-            } @if (content.content.resolveConditional(item)) {
-            <label
-              [class]="content.content.resolveClass()"
-              [ngStyle]="content.content.resolveStyle()"
-              (click)="content.content.click?.(item, $event)"
-            >
-              {{ content.content.resolveContent(item) }}
-            </label>
-            }
-          </li>
-          }
-        </ul>
-      </div>
-      <div class="items-buttons">
-        <div class="buttons">
-          @for (button of buttons(); track $index) {
-          <button
-            [ui-tooltip]="button.resolveTooltip(item)"
-            [class]="button.resolveClass(item)"
-            [ngStyle]="button.resolveStyle(item)"
-            (click)="button.click?.(item, $event)"
-          >
-            <span class="material-symbols-outlined">
-              {{ button.resolveIcon(item) }}
-            </span>
-          </button>
-          }
-        </div>
-      </div>
+  <div class="top-buttons-wrapper">
+    <div class="filters"></div>
+    <div class="buttons">
+      @for (button of topButtons(); track $index) {
+        <ng-container *ngTemplateOutlet="simpleButton; context: {$implicit: button}"/>
+      }
     </div>
-    } } @else {
-    <table>
-      <thead>
-        @for (item of content(); track $index) { @if (item.header.resolveConditional()) {
-        <th [class]="item.header.resolveClass()" [ngStyle]="item.header.resolveStyle()">
-          {{ item.header.resolveText() }}
-        </th>
-        } } @if (buttons().length) {
-        <th></th>
-        }
-      </thead>
-      <tbody>
-        @for (item of items(); track $index) {
-        <tr>
-          @for (td of content(); track $index) { @if (td.content.resolveConditional(item)) {
-          <td
-            [class]="td.content.resolveClass()"
-            [ngStyle]="td.content.resolveStyle()"
-            (click)="td.content.click?.(item, $event)"
-          >
-            {{ td.content.resolveContent(item) }}
-          </td>
-          } } @if (buttons().length) {
-          <td>
+  </div>
+  <div class="table-container">
+    @if (window.innerWidth < 768) {
+      @for (item of items(); track $index) {
+        <div class="mobile-item">
+          <div class="item-content">
+            <ul>
+              @for (content of content(); track $index) {
+                <li>
+                  @if (content.header.resolveConditional()) {
+                    <span
+                      [class]="content.header.resolveClass()"
+                      [ngStyle]="content.header.resolveStyle()"
+                      >{{ content.header.resolveText() }}</span
+                    >
+                  }
+                  @if (content.content.resolveConditional(item)) {
+                    <label
+                      [class]="content.content.resolveClass()"
+                      [ngStyle]="content.content.resolveStyle()"
+                      (click)="content.content.click?.(item, $event)"
+                    >
+                      {{ content.content.resolveContent(item) }}
+                    </label>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+          <div class="items-buttons">
             <div class="buttons">
               @for (button of buttons(); track $index) {
-              <button
-                [ui-tooltip]="button.resolveTooltip(item)"
-                [class]="button.resolveClass(item)"
-                [ngStyle]="button.resolveStyle(item)"
-                (click)="button.click?.(item, $event)"
-              >
-                <span class="material-symbols-outlined">
-                  {{ button.resolveIcon(item) }}
-                </span>
-              </button>
+                <ng-container *ngTemplateOutlet="itemButton; context: {$implicit: button, item}"/>
               }
             </div>
-          </td>
+          </div>
+        </div>
+      }
+    } @else {
+      <table>
+        <thead>
+          @for (item of content(); track $index) {
+            @if (item.header.resolveConditional()) {
+              <th [class]="item.header.resolveClass()" [ngStyle]="item.header.resolveStyle()">
+                {{ item.header.resolveText() }}
+              </th>
+            }
           }
-        </tr>
-        }
-      </tbody>
-    </table>
+          @if (buttons().length) {
+            <th></th>
+          }
+        </thead>
+        <tbody>
+          @for (item of items(); track $index) {
+            <tr>
+              @for (td of content(); track $index) {
+                @if (td.content.resolveConditional(item)) {
+                  <td
+                    [class]="td.content.resolveClass()"
+                    [ngStyle]="td.content.resolveStyle()"
+                    (click)="td.content.click?.(item, $event)"
+                  >
+                    {{ td.content.resolveContent(item) }}
+                  </td>
+                }
+              }
+              @if (buttons().length) {
+                <td>
+                  <div class="buttons">
+                    @for (button of buttons(); track $index) {
+                     <ng-container *ngTemplateOutlet="simpleButton; context: {$implicit: button, item}"/>
+                    }
+                  </div>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
     }
   </div>
 </section>
+
+<ng-template #simpleButton let-button>
+  <button
+    [ui-tooltip]="button.resolveTooltip()"
+    [class]="button.resolveClass()"
+    [ngStyle]="button.resolveStyle()"
+    (click)="button.click?.($event)"
+  >
+    @let icon = button.resolveIcon();
+    @let text = button.resolveText();
+    @if (text) {
+      {{ text }}
+    }
+    @if (icon) {
+      <span class="material-symbols-outlined">
+        {{ icon }}
+      </span>
+    }
+  </button>
+</ng-template>
+
+<ng-template #itemButton let-button let-item="item">
+  <button
+    [ui-tooltip]="button.resolveTooltip(item)"
+    [class]="button.resolveClass(item)"
+    [ngStyle]="button.resolveStyle(item)"
+    (click)="button.click?.($event)"
+  >
+    @let icon = button.resolveIcon(item);
+    @let text = button.resolveText(item);
+    @if (text) {
+      {{ text }}
+    }
+    @if (icon) {
+      <span class="material-symbols-outlined">
+        {{ icon }}
+      </span>
+    }
+  </button>
+</ng-template>

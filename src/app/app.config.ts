@@ -1,3 +1,4 @@
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
@@ -60,6 +61,7 @@ export const appConfig: ApplicationConfig = {
       showForeground: true,
     })),
     importProvidersFrom(NgxUiLoaderHttpModule),
+    provideHttpClient(withInterceptorsFromDi()),
     provideToastr({
       timeOut: 5000,
       autoDismiss: true,

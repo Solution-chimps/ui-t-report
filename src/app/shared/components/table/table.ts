@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
+import { Button } from '../../../core/models/components/button.model';
 import { TableButton } from '../../../core/models/table/buttons.model';
 import { TableDataBuilderContent } from '../../../core/models/table/table-builder-content.model';
 import { Tooltip } from '../tooltip/tooltip';
@@ -14,6 +15,7 @@ export class Table<T = unknown> {
 
   public readonly items = input<T[]>([]);
   public readonly buttons = input<TableButton<T>[]>([]);
+  public readonly topButtons = input<Button[]>([]);
   public readonly title = input('');
   public readonly content = input<TableDataBuilderContent<T>[]>([]);
 

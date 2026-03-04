@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, computed, DestroyRef, ElementRef, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent } from 'rxjs';
+import { filter, fromEvent } from 'rxjs';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class Tooltip implements AfterViewInit {
 
   private listenMouseOver() {
     fromEvent(this.elRef.nativeElement, 'mouseover')
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef), filter(() => !!this.message()))
       .subscribe(() => {
         this.show.set(true)
       });

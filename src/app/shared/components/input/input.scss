@@ -5,15 +5,12 @@
   margin: 15px 0px;
   position: relative;
   transition: margin-top 0.2s;
+  margin-top: 30px;
 
   &.ng-invalid.ng-touched input {
     border: 1px solid var(--ui-feedback-danger-500);
   }
 
-  &:has(>label+div>input:focus),
-  &:not(:has(>label+div>input:placeholder-shown)) {
-    margin-top: 40px;
-  }
 
   label {
     transition: all 0.2s;

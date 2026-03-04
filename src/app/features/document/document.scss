@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  max-width: 1200px;
+  margin: auto;
+
+  section {
+    .buttons {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      place-items: center;
+
+      button {
+        min-width: 120px;
+        font-weight: 600;
+
+        &:last-of-type {
+          background-color: var(--ui-brand-secondary-500);
+        }
+      }
+    }
+
+    h2 {
+      font-weight: 600;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 
 import { AbstractTable } from '../../core/abstracts/table.abstract';
+import { Button } from '../../core/models/components/button.model';
 import { Report } from '../../core/models/report.model';
 import { TableButton } from '../../core/models/table/buttons.model';
 import { TableDataBuilderContent } from '../../core/models/table/table-builder-content.model';
@@ -34,7 +35,7 @@ export class Documents extends AbstractTable<Report> {
       .build();
   }
 
-  protected override buttons(): TableButton<Report>[] {
+  protected override tableButtons(): TableButton<Report>[] {
     return TableButton.builder()
       .append('edit')
       .withTooltip('Editar')
@@ -42,6 +43,14 @@ export class Documents extends AbstractTable<Report> {
       .withClass('text-feedback-danger-500')
       .withTooltip('Excluir')
       .build()
+  }
+
+  protected override buttons(): Button[] {
+    return Button.builder()
+      .append('Cadastrar')
+      .withIcon('assignment_add')
+      .withClick(() => this.router.navigate(['document']))
+      .build();
   }
 
 }

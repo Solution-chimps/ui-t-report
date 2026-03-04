@@ -9,68 +9,113 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
+  gap: 5px;
+  flex-direction: row-reverse;
+}
+
+button {
+  @extend .button-style;
+  border: 1px solid var(--ui-border-default);
+  background-color: var(--ui-brand-primary-500);
+  color: var(--ui-text-inverse);
 }
 
 :host {
   padding: 10px;
 
-  .table-container {
-    padding: 20px;
-    border-radius: 8px;
+  section {
+    padding: 10px;
 
-    @include desktop {
-      background-color: var(--ui-disabled-bg);
+    h2 {
+      text-decoration: underline;
+      text-underline-offset: 8px;
+      text-underline-position: from-font;
+      margin-bottom: 40px;
     }
 
-    .mobile-item {
-      background-color: var(--ui-disabled-bg);
-      margin-bottom: 10px;
-      padding: 15px;
+    .top-buttons-wrapper {
       display: flex;
+      width: 100%;
       justify-content: space-between;
-      gap: 10px;
+      margin-bottom: 15px;
+
+      &:has(>.filters:empty):has(>.buttons:empty) {
+        display: none;
+      }
+
+      .buttons:empty {
+        display: none;
+      }
+
+      .filters {
+        display: flex;
+        gap: 10px;
+      }
+
+      @include tablet {
+        padding: 0px 20px;
+      }
+    }
+
+    .table-container {
+      padding: 20px;
       border-radius: 8px;
-      box-shadow: 2px 2px var(--ui-text-primary);
 
-      .item-content {
-        ul {
-          li {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 5px;
-            font-size: 14px;
+      @include desktop {
+        background-color: var(--ui-disabled-bg);
+      }
 
-            span {
-              color: var(--ui-gray-600);
-              opacity: 0.8;
+      .mobile-item {
+        background-color: var(--ui-disabled-bg);
+        margin-bottom: 10px;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        border-radius: 8px;
+        box-shadow: 2px 2px var(--ui-text-primary);
+
+        .item-content {
+          ul {
+            li {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 5px;
+              font-size: 14px;
+
+              span {
+                color: var(--ui-gray-600);
+                opacity: 0.8;
+              }
             }
           }
         }
-      }
 
-      .items-buttons {
-        .buttons {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
+        .items-buttons {
+          .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
 
-          button {
-            @extend .button-style;
+            button {
+              @extend .button-style;
+            }
           }
         }
+
       }
 
-    }
+      table>tbody>tr>td>.buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
 
-    table>tbody>tr>td>.buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-
-      button {
-        @extend .button-style;
+        button {
+          @extend .button-style;
+        }
       }
     }
   }
